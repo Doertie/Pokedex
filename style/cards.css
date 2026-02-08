@@ -1,7 +1,7 @@
 .card {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 280px;
   padding: 24px;
   border: 2px solid white;
   border-radius: 8px;
@@ -9,8 +9,20 @@
   gap: 32px;
 }
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow: 5px 9px 10px #ffffff53;
+  cursor: pointer;
+}
+
+.card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardNumber {
+  font-size: 24px;
+  color: #ffffff96;
 }
 
 .card h1 {
@@ -19,14 +31,22 @@
   text-shadow: 0 0 5px #000000;
 }
 
+.card figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 42px;
+}
+
+.card figcaption {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
 .card img {
   width: 250px;
   height: 250px;
-}
-
-.types {
-  display: flex;
-  justify-content: space-between;
 }
 
 .type_one {
