@@ -1,11 +1,11 @@
 let preLoadCase = [];
-let amountOfPokemons = 9
+let amountOfPokemons = 12;
 
 async function fetchDataJason() {
   for (let APIindex = 1; APIindex <= amountOfPokemons; APIindex++) {
     let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${APIindex}`);
     let responseAsJson = await response.json();
-    preLoadCase.push(responseAsJson)
+    preLoadCase.push(responseAsJson);
   }
 
   for (let preLoadCaseIndex = 0; preLoadCaseIndex < preLoadCase.length; preLoadCaseIndex++) {
@@ -16,7 +16,6 @@ async function fetchDataJason() {
       `
     }
   }
-  
 }
 
 function getCardTemplate(index) {

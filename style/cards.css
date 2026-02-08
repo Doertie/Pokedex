@@ -3,13 +3,20 @@
   flex-direction: column;
   width: 300px;
   padding: 24px;
+  border: 2px solid white;
   border-radius: 8px;
+  box-shadow: 5px 5px 10px #ffffff53;
   gap: 32px;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 5px 9px 10px #ffffff53;
 }
 
 .card h1 {
   font-weight: 700;
   color: #fff;
+  text-shadow: 0 0 5px #000000;
 }
 
 .card img {
@@ -31,6 +38,7 @@
   font-size: 20px;
   font-weight: 700;
   color: #fff;
+  text-shadow: 0 0 3px #000000;
 }
 
 .type_two {
@@ -38,13 +46,16 @@
   text-align: center;
   padding: 6px;
   border-radius: 20px;
-  background: #ffffff34;
+  background: #ffffff36;
   font-size: 20px;
   font-weight: 700;
   color: #fff;
+  text-shadow: 0 0 3px #000000;
 }
 
-.bg_grass, .bg_poison, .bg_fairy {
+.bg_grass,
+.bg_poison,
+.bg_fairy {
   background: #00cc41;
 }
 
@@ -56,18 +67,36 @@
   background: #378de9;
 }
 
-.bg_bug, .bg_fighting {
+.bg_bug,
+.bg_fighting {
   background: #f300b2;
 }
 
-.bg_normal {
+.bg_normal,
+.bg_ice {
   background: #bbf8ff;
 }
 
-.bg_electric, .bg_psychic {
+.bg_electric,
+.bg_psychic {
   background: #fffb00;
 }
 
-.bg_ground, .bg_rock {
+.bg_ground,
+.bg_rock {
   background: #c17400;
+}
+
+.bg_steel {
+  background: #858585;
+}
+
+.bg_ghost,
+.bg_dragon,
+.bg_flying {
+  background: #ff00b378;
+}
+
+.bg_dark {
+  background: #242424;
 }
