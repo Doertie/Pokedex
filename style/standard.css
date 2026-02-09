@@ -43,3 +43,11 @@ body {
 .max_width {
   width: 1440px;
 }
+
+dialog {
+  padding: 0;
+}
+
+dialog::backdrop {
+  background-color: #4f4b4bb8;
+}

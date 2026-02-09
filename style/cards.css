@@ -8,6 +8,7 @@
   box-shadow: 5px 5px 10px #ffffff53;
   gap: 32px;
 }
+
 .card:hover {
   transform: translateY(-3px);
   box-shadow: 5px 9px 10px #ffffff53;
@@ -59,6 +60,7 @@
   font-weight: 700;
   color: #fff;
   text-shadow: 0 0 3px #000000;
+  box-shadow: 0 0 2px #4444447e;
 }
 
 .type_two {
@@ -71,6 +73,7 @@
   font-weight: 700;
   color: #fff;
   text-shadow: 0 0 3px #000000;
+  box-shadow: 0 0 2px #4444447e;
 }
 
 .bg_grass,

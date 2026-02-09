@@ -1,5 +1,5 @@
 let preLoadCase = [];
-let amountOfPokemons = 12;
+let amountOfPokemons = 30;
 
 async function fetchThenRender() {
   try {
@@ -32,12 +32,32 @@ async function getPromise() {
 }
 
 function render() {
-  let refContent = document.getElementById('content');
-
   for (let preLoadCaseIndex = 0; preLoadCaseIndex < preLoadCase.length; preLoadCaseIndex++) {
-    refContent.innerHTML += getCardTemplate(preLoadCaseIndex);
+    document.getElementById("content").innerHTML += getCardTemplate(preLoadCaseIndex);
+
     if (preLoadCase[preLoadCaseIndex].types.length > 1) {
       document.getElementById(`types_${preLoadCaseIndex}`).innerHTML += getTemplateSecType(preLoadCaseIndex);
     };
   };
 };
+
+function showDetailedPokemonCard(index) {
+  const refPokemonCard = document.getElementById("detailedPokemonCard");
+
+  refPokemonCard.showModal();
+  refPokemonCard.innerHTML = getTemplateDetailedPokemon(index)
+  backdropClose(refPokemonCard)
+}
+
+function closeDetailedPokemonCard() {
+  let refPokemonCard = document.getElementById("detailedPokemonCard");
+  refPokemonCard.close();
+}
+
+function backdropClose(dialog) {
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) {
+      dialog.close();
+    }
+  });
+}

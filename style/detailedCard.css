@@ -1,0 +1,36 @@
+#detailedPokemonCard {
+  transform: translate(-50%, -50%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 340px;
+  height: 600px;
+  /* 320 x 568px */
+  border-radius: 16px;
+  border: 0px;
+}
+
+.closeButtonSpace {
+  display: flex;
+  justify-content: end;
+}
+
+.detailedCard {
+  width: 100%;
+  height: 100%;
+  border: 3px solid #fff;
+  border-radius: 16px;
+  box-sizing: border-box;
+  padding: 16px;
+}
+
+.detailedCard h1 {
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 5px #000000;
+}
+
+.detailedCard img {
+  width: 250px;
+  height: 250px;
+}
