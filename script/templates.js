@@ -43,6 +43,9 @@ function getTemplateDetailedPokemon(index) {
         <button>Evolution</button>
         <button>Moves</button>
       </nav>
+      <section id="genDetails">
+        <!-- gen details -->
+      </section>
     </footer>
   </section>`
 }
@@ -51,3 +54,13 @@ function getTemplateDetailedPokemon(index) {
     //   <button id="closeButton" type="button" onclick="closeDetailedPokemonCard()">X</button>
     // </div>
 
+function aboutDetails(index) {
+  return `
+    <table>
+      <tr>
+        <th>ability</th>
+        <td>${preLoadCase[index].abilities[0].ability.name}</td>
+      </tr>
+    </table>
+  `
+}

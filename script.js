@@ -43,12 +43,21 @@ function render() {
 
 function showDetailedPokemonCard(index) {
   const refPokemonCard = document.getElementById("detailedPokemonCard");
-
+  
   refPokemonCard.showModal();
-  refPokemonCard.innerHTML = getTemplateDetailedPokemon(index)
-  backdropClose(refPokemonCard)
+  refPokemonCard.innerHTML = getTemplateDetailedPokemon(index);
+  renderDetails(index)
+  backdropClose(refPokemonCard);
 }
 
+function renderDetails(index) {
+  let refDetails = document.getElementById("genDetails");
+  console.log(preLoadCase[index].abilities[0].ability.name);
+  
+  refDetails.innerHTML = aboutDetails(index);
+}
+
+//close dialog
 function closeDetailedPokemonCard() {
   let refPokemonCard = document.getElementById("detailedPokemonCard");
   refPokemonCard.close();
