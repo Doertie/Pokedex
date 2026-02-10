@@ -50,6 +50,9 @@
   height: 292px;
   background: #ffffff71;
   border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .navDetails {
@@ -79,10 +82,21 @@
   padding: 0 16px;
 }
 
-th,
-td {
-  color: #fff;
+th {
+  text-align: left;
+  width: 80px;
+  height: 24px;
+  color: #fdfdfd;
   font-size: 16px;
-  font-weight: 600;
-  text-shadow: 0 0 4px #000000;
+  font-weight: 555;
+  text-shadow: 0 0 2px #000000;
+}
+
+td {
+  text-align: left;
+  height: 24px;
+  color: #fdfdfd;
+  font-size: 16px;
+  font-weight: 555;
+  text-shadow: 0 0 2px #000000;
 }

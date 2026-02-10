@@ -1,5 +1,5 @@
 let preLoadCase = [];
-let amountOfPokemons = 30;
+let amountOfPokemons = 9;
 
 async function fetchThenRender() {
   try {
@@ -43,18 +43,30 @@ function render() {
 
 function showDetailedPokemonCard(index) {
   const refPokemonCard = document.getElementById("detailedPokemonCard");
-  
+
   refPokemonCard.showModal();
   refPokemonCard.innerHTML = getTemplateDetailedPokemon(index);
-  renderDetails(index)
+  // renderDetails(index);
   backdropClose(refPokemonCard);
 }
 
-function renderDetails(index) {
+function renderAboutDetails(index) {
   let refDetails = document.getElementById("genDetails");
-  console.log(preLoadCase[index].abilities[0].ability.name);
-  
   refDetails.innerHTML = aboutDetails(index);
+  renderAbilities(index)
+}
+function renderAbilities(index) {
+  const refAbility = document.getElementById("ability");
+  if (preLoadCase[index].abilities.length > 1) {
+    for (let abilitiesIndex = 0; abilitiesIndex < preLoadCase[index].abilities.length; abilitiesIndex++) {
+      refAbility.innerHTML += preLoadCase[index].abilities[abilitiesIndex].ability.name + '<br>';
+    }
+  }
+}
+
+function renderBaseStatesDetails(index) {
+  let refDetails = document.getElementById("genDetails");
+  refDetails.innerHTML = baseStatesDetails(index);
 }
 
 //close dialog

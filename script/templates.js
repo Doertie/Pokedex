@@ -38,8 +38,8 @@ function getTemplateDetailedPokemon(index) {
     </div>
     <footer class="detailSpace">
       <nav class="navDetails">
-        <button>About</button>
-        <button>Base Stats</button>
+        <button onclick="renderAboutDetails(${index})">About</button>
+        <button onclick="renderBaseStatesDetails(${index})">Base Stats</button>
         <button>Evolution</button>
         <button>Moves</button>
       </nav>
@@ -50,16 +50,59 @@ function getTemplateDetailedPokemon(index) {
   </section>`
 }
 
-    // <div class="closeButtonSpace">
-    //   <button id="closeButton" type="button" onclick="closeDetailedPokemonCard()">X</button>
-    // </div>
+// <div class="closeButtonSpace">
+//   <button id="closeButton" type="button" onclick="closeDetailedPokemonCard()">X</button>
+// </div>
 
 function aboutDetails(index) {
   return `
     <table>
       <tr>
-        <th>ability</th>
-        <td>${preLoadCase[index].abilities[0].ability.name}</td>
+        <th>Species</th>
+        <td>${preLoadCase[index].species.name}</td>
+      </tr>
+      <tr>
+        <th>Height</th>
+        <td>${preLoadCase[index].height}</td>
+      </tr>
+      <tr>
+        <th>Weight</th>
+        <td>${preLoadCase[index].weight}</td>
+      </tr>
+      <tr>
+        <th>Ability</th>
+        <td id="ability"></td>
+      </tr>
+    </table>
+  `
+}
+
+function baseStatesDetails(index) {
+  return `
+    <table>
+      <tr>
+        <th>HP</th>
+        <td>${preLoadCase[index].stats[0].base_stat}</td>
+      </tr>
+      <tr>
+        <th>Attack</th>
+        <td>${preLoadCase[index].stats[1].base_stat}</td>
+      </tr>
+      <tr>
+        <th>Defense</th>
+        <td>${preLoadCase[index].stats[2].base_stat}</td>
+      </tr>
+      <tr>
+        <th>Sp.Atk</th>
+        <td>${preLoadCase[index].stats[3].base_stat}</td>
+      </tr>
+      <tr>
+        <th>Sp.Def</th>
+        <td>${preLoadCase[index].stats[4].base_stat}</td>
+      </tr>
+      <tr>
+        <th>Speed</th>
+        <td>${preLoadCase[index].stats[5].base_stat}</td>
       </tr>
     </table>
   `
