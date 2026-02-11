@@ -110,13 +110,19 @@ function baseStatesDetails(index) {
 function evolutionDetails() {
   return `
     <section class="evolutionSpace">
-      <img src="${evoOneImg}" alt="">
-      <h1>${evoOne}</h1>
-      <img src="${evoTwoImg}" alt="">
-      <h1>${evoTwo}</h1>
-      <div id="evoThreeSpace">
+      <div id="evoOneSpace">
+        <img src="${evoOneImg}" alt="">
+        <h2>${evoOne}</h2>
+      </div>
+      <div id="evoTwoSpace">
+        <h2>&#8659</h2>
+        <img src="${evoTwoImg}" alt="">
+        <h2>${evoTwo}</h2>
+        </div>
+        <div id="evoThreeSpace">
+        <h2>&#8659</h2>
         <img src="${evoThreeImg}" alt="">
-        <h1>${evoThree}</h1>
+        <h2>${evoThree}</h2>
       </div>
     </section>
     `
