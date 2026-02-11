@@ -32,16 +32,15 @@ function getTemplateDetailedPokemon(index) {
       <header>
         <h1>${pokemoName}</h1>
       </header>
-      <section class="imageSpace">
+      <section id="imgSpace" class="imageSpace">
         <img src="${preLoadCase[index].sprites.other.dream_world.front_default}" alt="">
       </section>
     </div>
-    <footer class="detailSpace">
+    <footer id="detailSpace" class="detailSpace">
       <nav class="navDetails">
         <button onclick="renderAboutDetails(${index})">About</button>
         <button onclick="renderBaseStatesDetails(${index})">Base Stats</button>
-        <button>Evolution</button>
-        <button>Moves</button>
+        <button onclick="renderEvolutionDetails(${index})">Evolution</button>
       </nav>
       <section id="genDetails">
         <!-- gen details -->
@@ -105,5 +104,19 @@ function baseStatesDetails(index) {
         <td>${preLoadCase[index].stats[5].base_stat}</td>
       </tr>
     </table>
+  `
+}
+
+function evolutionDetails(index) {
+  let evoOne = evoPreLoad.chain.species.name.replace(/^./, char => char.toUpperCase());
+  let evoTwo = evoPreLoad.chain.evolves_to[0].species.name.replace(/^./, char => char.toUpperCase());
+  let evoThree = evoPreLoad.chain.evolves_to[0].evolves_to[0].species.name.replace(/^./, char => char.toUpperCase());
+
+  return `
+    <section class="evolutionSpace">
+      <h1>${evoOne}</h1>
+      <h1>${evoTwo}</h1>
+      <h1>${evoThree}</h1>
+    </section>
   `
 }

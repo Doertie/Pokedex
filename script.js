@@ -1,4 +1,5 @@
 let preLoadCase = [];
+let evoPreLoad;
 let amountOfPokemons = 9;
 
 async function fetchThenRender() {
@@ -46,15 +47,22 @@ function showDetailedPokemonCard(index) {
 
   refPokemonCard.showModal();
   refPokemonCard.innerHTML = getTemplateDetailedPokemon(index);
-  // renderDetails(index);
+  renderAboutDetails(index);
   backdropClose(refPokemonCard);
 }
 
+// render about Details
 function renderAboutDetails(index) {
   let refDetails = document.getElementById("genDetails");
+  let refImg = document.getElementById("imgSpace");
+  let refDetailSpace = document.getElementById("detailSpace");
+
+  refImg.style.display = "flex";
+  refDetailSpace.style.height = "292px"
   refDetails.innerHTML = aboutDetails(index);
   renderAbilities(index)
 }
+
 function renderAbilities(index) {
   const refAbility = document.getElementById("ability");
   if (preLoadCase[index].abilities.length > 1) {
@@ -64,9 +72,36 @@ function renderAbilities(index) {
   }
 }
 
+// render base states details
 function renderBaseStatesDetails(index) {
   let refDetails = document.getElementById("genDetails");
+  let refImg = document.getElementById("imgSpace");
+  let refDetailSpace = document.getElementById("detailSpace");
+
+  refImg.style.display = "flex";
+  refDetailSpace.style.height = "292px"
   refDetails.innerHTML = baseStatesDetails(index);
+}
+
+// render evolution
+async function renderEvolutionDetails(index) {
+  let refDetails = document.getElementById("genDetails");
+  let refImg = document.getElementById("imgSpace");
+  let refDetailSpace = document.getElementById("detailSpace");
+
+  refImg.style.display = "none";
+  refDetailSpace.style.height = "526px"
+  await fetchEvolution(index)
+  index +=1;
+  refDetails.innerHTML = evolutionDetails(index);
+}
+
+async function fetchEvolution(index) {
+  index += 1;
+  let responseEvo = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${index}/`);
+  let responseEvoAsJson = await responseEvo.json();
+
+  evoPreLoad = (responseEvoAsJson);
 }
 
 //close dialog
