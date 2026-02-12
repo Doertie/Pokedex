@@ -1,12 +1,16 @@
 let preLoadCase = [];
+let evoPreLoadCase = [];
 let evoPreLoad;
-let amountOfPokemons = 20;
+let amountOfPokemons = 10;
+let checkPromise
 let evoOne;
 let evoTwo;
 let evoThree;
 let evoOneImg;
 let evoTwoImg;
 let evoThreeImg;
+let checkEvoThree;
+let isSecEvoThree = false;
 let isLastEvoThree = false;
 
 async function fetchThenRender() {
@@ -59,7 +63,7 @@ function showDetailedPokemonCard(index) {
 }
 
 // render about Details
-function renderAboutDetails(index) {
+async function renderAboutDetails(index) {
   let refDetails = document.getElementById("genDetails");
   let refImg = document.getElementById("imgSpace");
   let refDetailSpace = document.getElementById("detailSpace");
@@ -68,6 +72,8 @@ function renderAboutDetails(index) {
   refDetailSpace.style.height = "292px"
   refDetails.innerHTML = aboutDetails(index);
   renderAbilities(index)
+  // refEvoURL = await fetchEvolution(index)
+  // await tryCatchEvoTree()
 }
 
 function renderAbilities(index) {
@@ -100,48 +106,9 @@ async function renderEvolutionDetails(index) {
   refDetailSpace.style.height = "526px"
 
   refEvoURL = await fetchEvolution(index)
-  getEvoImg(index)
+  await tryCatchEvoTree()
   refDetails.innerHTML = evolutionDetails();
-  let evoThreeDisplay = isLastEvoThree == true ? "flex" : "none";
-  document.getElementById("evoThreeSpace").style.display = evoThreeDisplay;
-}
-
-let checkEvoThree;
-function getEvoImg(index) {
-  index += 1;
-  let outputOne = preLoadCase.filter(employee => employee.name == `${evoPreLoad.chain.species.name}`);
-  evoOne = evoPreLoad.chain.species.name.replace(/^./, char => char.toUpperCase());
-  for (let i = 0; i < outputOne.length; i++) evoOneImg = outputOne[i].sprites.other.dream_world.front_default;
-  let outputTwo = preLoadCase.filter(employee => employee.name == `${evoPreLoad.chain.evolves_to[0].species.name}`);
-  evoTwo = evoPreLoad.chain.evolves_to[0].species.name.replace(/^./, char => char.toUpperCase());
-  for (let i = 0; i < outputTwo.length; i++) evoTwoImg = outputTwo[i].sprites.other.dream_world.front_default;
-
-  tryCatchEvoThree()
-}
-
-async function tryCatchEvoThree() {
-  try {
-    renderEvoThree()
-    let outputThree = preLoadCase.filter(employee => employee.name == `${evoPreLoad.chain.evolves_to[0].evolves_to[0].species.name}`);
-    evoThree = evoPreLoad.chain.evolves_to[0].evolves_to[0].species.name.replace(/^./, char => char.toUpperCase());
-    for (let i = 0; i < outputThree.length; i++) evoThreeImg = outputThree[i].sprites.other.dream_world.front_default;
-    isLastEvoThree = true;
-  } catch (error) {
-    console.log('check');
-    isLastEvoThree = false;
-  }
-}
-
-async function renderEvoThree() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (evoPreLoad.chain.evolves_to[0].evolves_to.length == 0) {
-        reject("it don't work");
-      } else {
-        resolve("it works");
-      };
-    }, 500);
-  });
+  showEvo()
 }
 
 async function fetchEvolution(index) {
@@ -153,6 +120,73 @@ async function fetchEvolution(index) {
   let responseEvoAsJson = await responseEvo.json();
 
   evoPreLoad = (responseEvoAsJson);
+}
+
+async function tryCatchEvoTree() {
+  try {
+    checkPromise = evoPreLoad.chain.length;
+    await getPromiseForEvoThree(checkPromise)
+    await getEvoOne()
+
+    checkPromise = evoPreLoad.chain.evolves_to.length;
+    await getPromiseForEvoThree(checkPromise)
+    await getEvoTwo()
+
+    checkPromise = evoPreLoad.chain.evolves_to[0].evolves_to.length;
+    await getPromiseForEvoThree(checkPromise)
+    await getEvoThree()
+  } catch (error) {
+    if (evoPreLoad.chain.evolves_to.length != 1) isSecEvoThree = false;
+    isLastEvoThree = false;
+  }
+}
+
+function showEvo() {
+  let evoTwoDisplay = isSecEvoThree == true ? "flex" : "none";
+  document.getElementById("evoTwoSpace").style.display = evoTwoDisplay;
+  let evoThreeDisplay = isLastEvoThree == true ? "flex" : "none";
+  document.getElementById("evoThreeSpace").style.display = evoThreeDisplay;
+}
+
+async function getPromiseForEvoThree(checkPromise) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (checkPromise == 0) {
+        reject("it don't work");
+      } else {
+        resolve("it works");
+      };
+    }, 500);
+  });
+}
+
+async function getEvoOne() {
+  evoOne = evoPreLoad.chain.species.name.replace(/^./, char => char.toUpperCase());
+  // let outputOne = evoPreLoadCase.filter(employee => employee.name == `${evoPreLoad.chain.species.name}`);
+  // for (let i = 0; i < outputOne.length; i++) evoOneImg = outputOne[i].sprites.other.dream_world.front_default;
+  let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${evoOne}`);
+  let responseAsJson = await response.json();
+  evoOneImg = await responseAsJson.sprites.other.dream_world.front_default;
+}
+
+async function getEvoTwo() {
+  evoTwo = evoPreLoad.chain.evolves_to[0].species.name.replace(/^./, char => char.toUpperCase());
+  // let outputTwo = preLoadCase.filter(employee => employee.name == `${evoPreLoad.chain.evolves_to[0].species.name}`);
+  // for (let i = 0; i < outputTwo.length; i++) evoTwoImg = outputTwo[i].sprites.other.dream_world.front_default;
+  let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${evoTwo}`);
+  let responseAsJson = await response.json();
+  evoTwoImg = await responseAsJson.sprites.other.dream_world.front_default;
+  isSecEvoThree = true;
+}
+
+async function getEvoThree() {
+  evoThree = evoPreLoad.chain.evolves_to[0].evolves_to[0].species.name.replace(/^./, char => char.toUpperCase());
+  // let outputThree = preLoadCase.filter(employee => employee.name == `${evoPreLoad.chain.evolves_to[0].evolves_to[0].species.name}`);
+  // for (let i = 0; i < outputThree.length; i++) evoThreeImg = outputThree[i].sprites.other.dream_world.front_default;
+  let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${evoThree}`);
+  let responseAsJson = await response.json();
+  evoThreeImg = await responseAsJson.sprites.other.dream_world.front_default;
+  isLastEvoThree = true;
 }
 
 //close dialog
